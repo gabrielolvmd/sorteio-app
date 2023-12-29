@@ -1,0 +1,38 @@
+@use "/src/styles.scss" as *;
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 0;
+  font-family: $secondary-font;
+  // border: 1px solid red;
+}
+
+.menu_logo a {
+  font-weight: $blackfont;
+  font-size: $large-size;
+}
+
+#fair {
+  color: $main-green;
+}
+
+#play {
+  color: $main-yellow;
+}
+
+.menu_loginArea {
+  font-size: $medium-size;
+  font-weight: $medium;
+  display: flex;
+  gap: 3em;
+  align-items: center;
+}
+
+.menu_loginArea a:last-child {
+  background: $main-green;
+  color: white;
+  padding: 1em;
+  border-radius: 1em;
+}

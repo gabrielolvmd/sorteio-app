@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use "/src/_colors" as *;
+@use "/src/_typography" as *;
+@use "/src/_variables" as *;
+
+@forward "colors";
+@forward "typography";
+@forward "variables";
+
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2em;
+  font-family: $secondary-font;
+  // background: rgb(145, 145, 145);
+}
+
+a,
+button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}

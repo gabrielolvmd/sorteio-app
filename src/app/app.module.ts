@@ -3,16 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { DefaultMenuComponent } from './components/default-menu/default-menu.component';
+import { GreenButtonComponent } from './components/green-button/green-button.component';
+import { BorderButtonComponent } from './components/border-button/border-button.component';
+import { SorteioNormalComponent } from './pages/sorteio-normal/sorteio-normal.component';
+import { DadosPartidaComponent } from './components/dados-partida/dados-partida.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    DefaultMenuComponent,
+    GreenButtonComponent,
+    BorderButtonComponent,
+    SorteioNormalComponent,
+    DadosPartidaComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

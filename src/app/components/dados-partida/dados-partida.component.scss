@@ -1,0 +1,101 @@
+@use "/src/styles.scss" as *;
+
+.dados_container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5em;
+  margin-top: 3em;
+
+  // border: 1px solid red;
+  font-weight: $medium;
+  font-size: $medium-size;
+}
+
+.dados_container_inserirInfos {
+  display: flex;
+  max-width: 810px;
+  gap: 4em;
+  border: 1px solid red;
+}
+
+.dados_container_lista,
+.dados_container_info,
+.num-equipes_container,
+.titulo_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.dados_container_info {
+  gap: 2em;
+}
+
+textarea,
+input {
+  border: 1px solid $border-text-area;
+  outline: none;
+  font-family: $secondary-font;
+  font-weight: $regular;
+  font-size: $medium-size;
+  &:focus {
+    outline: 1px solid $border-text-focus;
+  }
+}
+
+textarea,
+input {
+  resize: none;
+  padding: 1em;
+}
+
+.dados_container_buttons {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+.limpar-btn {
+  cursor: pointer;
+}
+
+.dados_container_equipesSorteadas {
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  max-width: 810px;
+  // border: 1px solid red;
+}
+
+.dados_container_equipesSorteadas .time ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  text-align: center;
+}
+
+.dados_container_equipesSorteadas .time ul li {
+  padding: 0.5em 1em;
+}
+
+.dados_container_equipesSorteadas .time ul li:nth-child(4n - 3),
+.dados_container_equipesSorteadas .time ul li:nth-child(4n) {
+  background-color: blue; /* Cor azul para o primeiro e quarto elementos em cada grupo de quatro */
+}
+
+.dados_container_equipesSorteadas .time ul li:nth-child(4n - 2),
+.dados_container_equipesSorteadas .time ul li:nth-child(4n - 1) {
+  background-color: red; /* Cor vermelha para o segundo e terceiro elementos em cada grupo de quatro */
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 1em;
+  border: 1px solid red;
+}

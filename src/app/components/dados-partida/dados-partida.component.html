@@ -1,0 +1,31 @@
+<div class="dados_container">
+  <div class="dados_container_inserirInfos">
+    <div class="dados_container_lista">
+      <label for="lista-jogadores">Escreva os nomes abaixo</label>
+      <textarea id="lista-jogadores" name="lista-jogadores" rows="16" cols="40" [(ngModel)]="nomes"></textarea>
+    </div>
+    <div class="dados_container_info">
+      <div class="num-equipes_container">
+        <label for="num-equipes">Número de equipes</label>
+        <input type="number" id="num-equipes" name="num-equipes" required [(ngModel)]="numeroEquipes">
+      </div>
+      <div class="titulo_container">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo">
+      </div>
+      <div class="dados_container_buttons">
+        <app-green-button text="Sortear" (buttonClick)="onSortButtonClick()"></app-green-button>
+        <button class="limpar-btn" (click)="clear()">Limpar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dados_container_equipesSorteadas">
+    <div *ngFor="let equipe of equipesSorteadas; let i = index" class="time">
+      <h3>{{equipe.nome}}</h3>
+      <ul>
+        <li *ngFor="let membro of equipe.membros">{{membro}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

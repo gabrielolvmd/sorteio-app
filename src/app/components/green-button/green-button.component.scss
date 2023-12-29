@@ -1,0 +1,12 @@
+@use "/src/styles.scss" as *;
+
+.starSortBtn {
+  cursor: pointer;
+  box-sizing: border-box;
+  background: $main-green;
+  color: white;
+  font-weight: $medium;
+  font-size: $medium-size;
+  padding: 1em 1.5em;
+  border-radius: 1.2em;
+}

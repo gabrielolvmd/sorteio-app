@@ -1,0 +1,10 @@
+@use "/src/styles.scss" as *;
+
+.sortBtn {
+  color: $main-yellow;
+  border: 2px solid $main-yellow;
+  font-weight: $semibold;
+  font-size: $medium-size;
+  padding: 1em 1.5em;
+  border-radius: 1.2em;
+}
