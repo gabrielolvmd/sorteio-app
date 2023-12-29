@@ -20,7 +20,7 @@
   max-width: 980px;
   width: 100%;
   gap: 4em;
-  border: 1px solid red;
+  // border: 1px solid red;
 }
 
 .dados_container_lista {
@@ -58,6 +58,7 @@ textarea,
 input {
   border: 1px solid $border-text-area;
   outline: none;
+  box-shadow: 5px 5px 9px #dcdcdc, -5px -5px 9px #fefefe;
   font-family: $secondary-font;
   font-weight: $regular;
   font-size: $medium-size;
@@ -89,7 +90,9 @@ input {
   display: flex;
   flex-direction: column;
   gap: 2em;
+  margin-bottom: 10em;
 }
+
 .equipesSorteadas_grid {
   display: grid;
   gap: 2em;
@@ -104,7 +107,7 @@ input {
 }
 
 .titulo_equipe {
-  margin-bottom: 0.5em;
+  padding: 0.5em;
 }
 
 .dados_container_equipesSorteadas .time ul {
@@ -131,5 +134,14 @@ input {
 .time {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  // border: 1px solid red;
+  box-shadow: 5px 5px 9px #dcdcdc, -5px -5px 9px #fefefe;
+  border: 1px solid $border-text-area;
+  outline: none;
+}
+
+.errorMesage {
+  font-size: 14px;
+  font-weight: $regular;
+  color: red;
 }

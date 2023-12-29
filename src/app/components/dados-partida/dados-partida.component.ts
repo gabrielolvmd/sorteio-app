@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dados-partida',
@@ -12,34 +12,43 @@ export class DadosPartidaComponent implements OnInit {
   titulo: string = '';
   mostrarTitulo = false;
   equipesSorteadas: any[] = [];
+  errorMesage: string = '';
 
-  constructor() {}
+  constructor(private elementRef: ElementRef) {}
 
   onSortButtonClick() {
     const arrayNomes = this.nomes.split('\n');
-    const qtdNomes = arrayNomes.length;
-
+    const nomesValidos = arrayNomes.filter((nome) => nome !== '');
+    const qtdNomes = nomesValidos.length;
+    this.errorMesage = '';
     if (qtdNomes < 2) {
+      this.errorMesage = 'Escreva mais de um nome.';
       throw new Error('Escreva mais de um nome.');
     } else if (this.numeroEquipes < 2 || this.numeroEquipes > qtdNomes) {
+      this.errorMesage =
+        'O número de equipes tem que ser maior que dois e menor que a quantidade de nomes.';
       throw new Error(
         'O número de equipes tem que ser maior que dois e menor que a quantidade de nomes.'
       );
     } else {
       this.equipesSorteadas = this.sortearEquipes(
-        arrayNomes,
+        nomesValidos,
         this.numeroEquipes
       );
 
       console.log(this.equipesSorteadas);
     }
     this.mostrarTitulo = true;
+    setTimeout(() => {
+      this.autoScrollToTeams();
+    }, 100);
   }
 
   clear() {
     this.nomes = '';
     this.numeroEquipes = 2;
     this.titulo = '';
+    this.qtdJogadores = 0;
     this.mostrarTitulo = false;
   }
 
@@ -89,6 +98,27 @@ export class DadosPartidaComponent implements OnInit {
   onNomesInput(event: any) {
     const arrayNomes = this.nomes.split('\n');
     this.qtdJogadores = arrayNomes.filter((nome) => nome.trim() !== '').length;
+  }
+
+  autoScrollToTeams() {
+    const equipesSorteadasElement = this.elementRef.nativeElement.querySelector(
+      '.dados_container_equipesSorteadas'
+    );
+
+    if (equipesSorteadasElement) {
+      const posicao = equipesSorteadasElement.getBoundingClientRect();
+
+      // Adiciona a posição atual da rolagem para obter a posição absoluta
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const posicaoAbsoluta = posicao.top + scrollTop;
+
+      // Rola até a posição absoluta com suavidade
+      window.scrollTo({
+        top: posicaoAbsoluta,
+        behavior: 'smooth',
+      });
+    }
   }
 
   ngOnInit(): void {}
