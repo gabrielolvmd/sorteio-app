@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class DadosPartidaComponent implements OnInit {
   nomes: string = '';
   numeroEquipes: number = 2;
+  qtdJogadores: number = 0;
   titulo: string = '';
+  mostrarTitulo = false;
   equipesSorteadas: any[] = [];
 
   constructor() {}
@@ -31,12 +33,14 @@ export class DadosPartidaComponent implements OnInit {
 
       console.log(this.equipesSorteadas);
     }
+    this.mostrarTitulo = true;
   }
 
   clear() {
     this.nomes = '';
     this.numeroEquipes = 2;
-    this.titulo = ' ';
+    this.titulo = '';
+    this.mostrarTitulo = false;
   }
 
   sortearEquipes(nomes: string[], numeroDeEquipes: number) {
@@ -76,7 +80,15 @@ export class DadosPartidaComponent implements OnInit {
     }
 
     return equipes;
-    console.log(equipes);
+  }
+
+  onTituloInput() {
+    this.mostrarTitulo = false;
+  }
+
+  onNomesInput(event: any) {
+    const arrayNomes = this.nomes.split('\n');
+    this.qtdJogadores = arrayNomes.filter((nome) => nome.trim() !== '').length;
   }
 
   ngOnInit(): void {}

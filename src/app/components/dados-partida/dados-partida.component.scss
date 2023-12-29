@@ -7,19 +7,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5em;
-  margin-top: 3em;
+  gap: 6em;
 
   // border: 1px solid red;
+  margin-top: 5em;
   font-weight: $medium;
   font-size: $medium-size;
 }
 
 .dados_container_inserirInfos {
   display: flex;
-  max-width: 810px;
+  max-width: 980px;
+  width: 100%;
   gap: 4em;
   border: 1px solid red;
+}
+
+.dados_container_lista {
+  position: relative;
+}
+
+.qtdJogadores {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 0.3em 1em;
+  border-radius: 1em;
+  color: color-mix(in srgb, $main-yellow 70%, black 30%);
+  background: rgb(223, 223, 63);
 }
 
 .dados_container_lista,
@@ -29,6 +44,10 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
+}
+
+.dados_container_info {
+  width: 100%;
 }
 
 .dados_container_info {
@@ -64,12 +83,28 @@ input {
 }
 
 .dados_container_equipesSorteadas {
+  width: 100%;
+  max-width: 980px;
+  // border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.equipesSorteadas_grid {
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(2, 1fr);
-  width: 100%;
-  max-width: 810px;
-  // border: 1px solid red;
+}
+
+.titulo,
+.titulo_equipe {
+  font-size: $medium-size;
+  font-weight: $semibold;
+  font-family: $secondary-font;
+}
+
+.titulo_equipe {
+  margin-bottom: 0.5em;
 }
 
 .dados_container_equipesSorteadas .time ul {
@@ -85,17 +120,16 @@ input {
 
 .dados_container_equipesSorteadas .time ul li:nth-child(4n - 3),
 .dados_container_equipesSorteadas .time ul li:nth-child(4n) {
-  background-color: blue; /* Cor azul para o primeiro e quarto elementos em cada grupo de quatro */
+  background-color: $li-dark-gray; /* Cor azul para o primeiro e quarto elementos em cada grupo de quatro */
 }
 
 .dados_container_equipesSorteadas .time ul li:nth-child(4n - 2),
 .dados_container_equipesSorteadas .time ul li:nth-child(4n - 1) {
-  background-color: red; /* Cor vermelha para o segundo e terceiro elementos em cada grupo de quatro */
+  background-color: $li-light-gray; /* Cor vermelha para o segundo e terceiro elementos em cada grupo de quatro */
 }
 
 .time {
   display: flex;
   flex-direction: column;
-  padding: 0.5em 1em;
   border: 1px solid red;
 }

@@ -5,7 +5,7 @@ import { SorteioNormalComponent } from './pages/sorteio-normal/sorteio-normal.co
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomePageComponent,
   },
   {
