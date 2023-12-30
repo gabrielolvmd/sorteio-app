@@ -1,0 +1,52 @@
+<div class="dados_container">
+  <div class="dados_container_inserirInfos">
+    <div class="dados_container_lista">
+      <label for="lista-jogadores">Escreva os nomes abaixo</label>
+      <textarea id="lista-jogadores" name="lista-jogadores" rows="16" cols="40" [(ngModel)]="nomes" (input)="onNomesInput($event)" placeholder="Digite cada jogador em uma linha"></textarea>
+      <span class="qtdJogadores">{{qtdJogadores}}</span>
+    </div>
+    <div class="dados_container_info">
+      <div class="num-equipes_container">
+        <label for="num-equipes">Número de equipes</label>
+        <input type="number" id="num-equipes" name="num-equipes" required [(ngModel)]="numeroEquipes" min="2" max="24">
+      </div>
+      <div class="titulo_container">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" (input)="onTituloInput" placeholder="Torneio de confraternização">
+      </div>
+      <div class="dados_container_buttons">
+        <app-green-button text="Ajustar níveis" (buttonClick)="adjustPlayerLevelsButton()"></app-green-button>
+        <button class="limpar-btn" (click)="clear()">Limpar</button>
+      </div>
+      <div class="errorMesage">{{errorMesage}}</div>
+    </div>
+  </div>
+  <!-- <div class="dados_container_equipesSorteadas" *ngIf="mostrarTimes">
+    <h2 class="titulo" *ngIf="mostrarTitulo">{{titulo}}</h2>
+
+    <div class="equipesSorteadas_grid">
+      <div *ngFor="let equipe of equipesSorteadas; let i = index" class="time">
+
+        <h3 class="titulo_equipe">{{equipe.nome}}</h3>
+        <ul>
+          <li *ngFor="let membro of equipe.membros">{{membro}}</li>
+        </ul>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="dados_container_editarJogadores" *ngIf="mostrarNivelJogadores">
+    <h3 *ngIf="mostrarTitulo">Ajuste o nível dos jogadores utilizando as estrelas</h3>
+    <ul class="uljogadores">
+      <li *ngFor="let jogador of jogadores">
+        <label for="{{jogador.nome}}" class="nomeJogador">{{jogador.nome}}</label>
+        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-1" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 1)">
+        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-2" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 2)">
+        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-3" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 3)">
+        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-4" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 4)">
+        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-5" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 5)">
+      </li>
+
+    </ul>
+  </div>
+</div>

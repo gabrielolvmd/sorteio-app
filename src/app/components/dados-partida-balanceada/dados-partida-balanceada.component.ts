@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { Jogador } from 'src/app/model/jogador.model';
 
 @Component({
-  selector: 'app-dados-partida',
-  templateUrl: './dados-partida.component.html',
-  styleUrls: ['./dados-partida.component.scss'],
+  selector: 'app-dados-partida-balanceada',
+  templateUrl: './dados-partida-balanceada.component.html',
+  styleUrls: ['./dados-partida-balanceada.component.scss'],
 })
-export class DadosPartidaComponent implements OnInit {
+export class DadosPartidaBalanceadaComponent implements OnInit {
   nomes: string = '';
   numeroEquipes: number = 2;
   qtdJogadores: number = 0;
@@ -15,13 +16,22 @@ export class DadosPartidaComponent implements OnInit {
   equipesSorteadas: any[] = [];
   errorMesage: string = '';
 
+  mostrarNivelJogadores: boolean = true;
+  jogadores: Jogador[] = [];
+
   constructor(private elementRef: ElementRef) {}
 
-  onSortButtonClick() {
+  ngOnInit(): void {}
+
+  adjustPlayerLevelsButton() {
+    this.jogadores = [];
+
     const arrayNomes = this.nomes.split('\n');
     const nomesValidos = arrayNomes.filter((nome) => nome !== '');
     const qtdNomes = nomesValidos.length;
     this.errorMesage = '';
+
+    // Confere se existe mais que um nome e também se a quantidade de equipes ultrapassa a quantidade de nomes. Nesses casos é impossível realizar um sorteio.
     if (qtdNomes < 2) {
       this.errorMesage = 'Escreva mais de um nome.';
       throw new Error('Escreva mais de um nome.');
@@ -31,19 +41,45 @@ export class DadosPartidaComponent implements OnInit {
       throw new Error(
         'O número de equipes tem que ser maior que dois e menor que a quantidade de nomes.'
       );
-    } else {
-      this.equipesSorteadas = this.sortearEquipes(
-        nomesValidos,
-        this.numeroEquipes
-      );
-
-      console.log(this.equipesSorteadas);
     }
+
+    // Reformula os nomes que ultrapassem 15 caracteres e substitui as últimas letras por (...)
+    // obs: o array original é modificado aqui.
+    nomesValidos.forEach((nome, index, array) => {
+      if (nome.length > 15) {
+        array[index] = nome.slice(0, 13).trim().concat('...');
+      }
+    });
+
+    // else {
+    //   this.equipesSorteadas = this.sortearEquipes(
+    //     nomesValidos,
+    //     this.numeroEquipes
+    //   );
+
+    //   console.log(this.equipesSorteadas);
+    // }
+
+    nomesValidos.forEach((nome) => {
+      this.jogadores.push({ nome: nome, nivel: 0 });
+    });
     this.mostrarTitulo = true;
     this.mostrarTimes = true;
+    this.mostrarNivelJogadores = true;
+
     setTimeout(() => {
       this.autoScrollToTeams();
     }, 100);
+  }
+
+  onNivelChange(jogador: Jogador, nivel: number) {
+    // Ajustar apenas o nível do jogador específico
+    jogador.nivel = nivel;
+
+    // Exibir no console o nome e o nível de cada jogador
+    this.jogadores.forEach((j) => {
+      console.log(`Nome: ${j.nome}, Nível: ${j.nivel}`);
+    });
   }
 
   clear() {
@@ -53,17 +89,10 @@ export class DadosPartidaComponent implements OnInit {
     this.qtdJogadores = 0;
     this.mostrarTitulo = false;
     this.mostrarTimes = false;
+    this.jogadores = [];
   }
 
   sortearEquipes(nomes: string[], numeroDeEquipes: number) {
-    // Reformula os nomes que ultrapassem 15 caracteres e substitui as últimas letras por (...)
-    // obs: o array original é modificado aqui.
-    nomes.forEach((nome, index, array) => {
-      if (nome.length > 15) {
-        array[index] = nome.slice(0, 13).trim().concat('...');
-      }
-    });
-
     console.log(nomes);
 
     // Embaralha a ordem dos nomes aleatoriamente
@@ -133,6 +162,4 @@ export class DadosPartidaComponent implements OnInit {
       });
     }
   }
-
-  ngOnInit(): void {}
 }

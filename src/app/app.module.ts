@@ -10,6 +10,8 @@ import { BorderButtonComponent } from './components/border-button/border-button.
 import { SorteioNormalComponent } from './pages/sorteio-normal/sorteio-normal.component';
 import { DadosPartidaComponent } from './components/dados-partida/dados-partida.component';
 import { FormsModule } from '@angular/forms';
+import { SorteioBalanceadoComponent } from './pages/sorteio-balanceado/sorteio-balanceado.component';
+import { DadosPartidaBalanceadaComponent } from './components/dados-partida-balanceada/dados-partida-balanceada.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     BorderButtonComponent,
     SorteioNormalComponent,
     DadosPartidaComponent,
+    SorteioBalanceadoComponent,
+    DadosPartidaBalanceadaComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
