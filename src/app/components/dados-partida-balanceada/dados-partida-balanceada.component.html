@@ -36,16 +36,22 @@
   </div> -->
 
   <div class="dados_container_editarJogadores" *ngIf="mostrarNivelJogadores">
-    <h3 *ngIf="mostrarTitulo">Ajuste o nível dos jogadores utilizando as estrelas</h3>
+    <div class="dados_container_editarJogadores_content" *ngIf="mostrarTitulo">
+      <h3>Ajuste o nível dos jogadores utilizando as estrelas</h3>
+      <app-small-border-button text="Sortear"></app-small-border-button>
+    </div>
     <ul class="uljogadores">
       <li *ngFor="let jogador of jogadores">
-        <label for="{{jogador.nome}}" class="nomeJogador">{{jogador.nome}}</label>
-        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-1" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 1)">
-        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-2" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 2)">
-        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-3" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 3)">
-        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-4" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 4)">
-        <input type="radio" name="{{jogador.nome}}" id="{{jogador.nome}}-5" class="estrelasJogador" [(ngModel)]="jogador.nivel" (change)="onNivelChange(jogador, 5)">
+        <label for="nivelJogador-{{jogador.nome}}" class="nomeJogador">{{jogador.nome}}</label>
+        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-1" class="estrelasJogador">
+        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-2" class="estrelasJogador">
+        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-3" class="estrelasJogador">
+        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-4" class="estrelasJogador">
+        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-5" class="estrelasJogador">
       </li>
+
+
+
 
     </ul>
   </div>

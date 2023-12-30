@@ -72,16 +72,6 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
     }, 100);
   }
 
-  onNivelChange(jogador: Jogador, nivel: number) {
-    // Ajustar apenas o nível do jogador específico
-    jogador.nivel = nivel;
-
-    // Exibir no console o nome e o nível de cada jogador
-    this.jogadores.forEach((j) => {
-      console.log(`Nome: ${j.nome}, Nível: ${j.nivel}`);
-    });
-  }
-
   clear() {
     this.nomes = '';
     this.numeroEquipes = 2;

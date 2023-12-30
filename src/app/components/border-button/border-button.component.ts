@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BorderButtonComponent implements OnInit {
   @Input()
   text: string;
+
   constructor() {
     this.text = '';
   }

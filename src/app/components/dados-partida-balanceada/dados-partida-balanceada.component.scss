@@ -156,3 +156,9 @@ input {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+.dados_container_editarJogadores_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

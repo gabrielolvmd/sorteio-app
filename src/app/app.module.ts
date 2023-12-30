@@ -12,6 +12,7 @@ import { DadosPartidaComponent } from './components/dados-partida/dados-partida.
 import { FormsModule } from '@angular/forms';
 import { SorteioBalanceadoComponent } from './pages/sorteio-balanceado/sorteio-balanceado.component';
 import { DadosPartidaBalanceadaComponent } from './components/dados-partida-balanceada/dados-partida-balanceada.component';
+import { SmallBorderButtonComponent } from './components/small-border-button/small-border-button.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DadosPartidaBalanceadaComponent } from './components/dados-partida-bala
     DadosPartidaComponent,
     SorteioBalanceadoComponent,
     DadosPartidaBalanceadaComponent,
+    SmallBorderButtonComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

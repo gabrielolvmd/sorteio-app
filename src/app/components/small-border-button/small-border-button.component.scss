@@ -1,0 +1,12 @@
+@use "/src/styles.scss" as *;
+
+.small-btn {
+  cursor: pointer;
+  box-sizing: border-box;
+  color: $main-green;
+  font-weight: $medium;
+  border: 2px solid $main-green;
+  font-size: $medium-size;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+}
