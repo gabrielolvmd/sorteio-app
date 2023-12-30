@@ -25,9 +25,9 @@
   </div>
 
   <div class="dados_container_editarJogadores" *ngIf="mostrarNivelJogadores">
-    <div class="dados_container_editarJogadores_content" *ngIf="mostrarTitulo">
+    <div class="dados_container_editarJogadores_content" *ngIf="mostrarTimes">
       <h3>Ajuste o nível dos jogadores utilizando as estrelas</h3>
-      <app-small-border-button text="Sortear" (buttonClick)="sortearTimes()"></app-small-border-button>
+      <app-small-border-button text="Sortear" (buttonClick)="sortearTimesBalanceados()"></app-small-border-button>
     </div>
     <ul class="uljogadores">
       <li *ngFor="let jogador of jogadores">
@@ -44,6 +44,7 @@
   </div>
 
   <div class="dados_container_equipesBalanceadas">
+    <h3 class="titulo_equipe" *ngIf="mostrarTitulo">{{titulo}}</h3>
     <div class="dados_container_equipesBalanceadas_tabela">
       <div class="tabela_content" *ngFor="let time of timesBalanceados; let i = index">
         <div class="tabela_content_header">

@@ -41,8 +41,13 @@ export class DadosPartidaComponent implements OnInit {
     }
     this.mostrarTitulo = true;
     this.mostrarTimes = true;
+
     setTimeout(() => {
-      this.autoScrollToTeams();
+      const equipesSorteadasElement =
+        this.elementRef.nativeElement.querySelector(
+          '.dados_container_equipesSorteadas'
+        );
+      this.scrollTo(equipesSorteadasElement);
     }, 100);
   }
 
@@ -113,13 +118,9 @@ export class DadosPartidaComponent implements OnInit {
     this.qtdJogadores = arrayNomes.filter((nome) => nome.trim() !== '').length;
   }
 
-  autoScrollToTeams() {
-    const equipesSorteadasElement = this.elementRef.nativeElement.querySelector(
-      '.dados_container_equipesSorteadas'
-    );
-
-    if (equipesSorteadasElement) {
-      const posicao = equipesSorteadasElement.getBoundingClientRect();
+  scrollTo(element: HTMLElement) {
+    if (element) {
+      const posicao = element.getBoundingClientRect();
 
       // Adiciona a posição atual da rolagem para obter a posição absoluta
       const scrollTop =

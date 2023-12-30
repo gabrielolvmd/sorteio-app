@@ -11,11 +11,12 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
   numeroEquipes: number = 2;
   qtdJogadores: number = 0;
   titulo: string = '';
-  mostrarTitulo: boolean = false;
-  mostrarTimes: boolean = false;
   errorMesage: string = '';
 
+  mostrarTitulo: boolean = false;
+  mostrarTimes: boolean = false;
   mostrarNivelJogadores: boolean = true;
+
   jogadores: Jogador[] = [];
   timesBalanceados: Jogador[][] = [];
 
@@ -51,44 +52,19 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
       }
     });
 
-    // else {
-    //   this.equipesSorteadas = this.sortearEquipes(
-    //     nomesValidos,
-    //     this.numeroEquipes
-    //   );
-
-    //   console.log(this.equipesSorteadas);
-    // }
-
     nomesValidos.forEach((nome) => {
       this.jogadores.push({ nome: nome, nivel: 0 });
     });
 
-    this.mostrarTitulo = true;
     this.mostrarTimes = true;
     this.mostrarNivelJogadores = true;
 
     setTimeout(() => {
-      this.autoScrollToTeams();
+      const editarJogadores = this.elementRef.nativeElement.querySelector(
+        '.dados_container_editarJogadores'
+      );
+      this.scrollTo(editarJogadores);
     }, 100);
-  }
-
-  sortearTimes() {
-    // Itera sobre a lista de jogadores
-    this.jogadores.forEach((jogador) => {
-      // Obtém o índice do input marcado para o jogador atual
-      const indiceInputMarcado = this.obterIndiceNivelJogador(jogador.nome);
-
-      // Atribui o valor do índice + 1 ao nível do jogador
-      jogador.nivel = indiceInputMarcado + 1;
-    });
-
-    // Mostre no console o nome e nível de cada jogador
-    this.jogadores.forEach((jogador) => {
-      console.log(`Nome: ${jogador.nome}, Nível: ${jogador.nivel}`);
-    });
-
-    this.sortearTimesBalanceados();
   }
 
   // Função para obter o índice do input marcado para um jogador específico
@@ -111,6 +87,15 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
   }
 
   sortearTimesBalanceados() {
+    // Itera sobre a lista de jogadores
+    this.jogadores.forEach((jogador) => {
+      // Obtém o índice do input marcado para o jogador atual
+      const indiceInputMarcado = this.obterIndiceNivelJogador(jogador.nome);
+
+      // Atribui o valor do índice + 1 ao nível do jogador
+      jogador.nivel = indiceInputMarcado + 1;
+    });
+
     // Ordena os jogadores por nível em ordem decrescente
     const jogadoresOrdenados = this.jogadores
       .slice()
@@ -128,25 +113,34 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
       this.numeroEquipes;
 
     // Distribui os jogadores nos times tentando manter a soma próxima à média
+    let timeAtual = 0;
+    let jogadoresPorTime = Math.floor(
+      this.jogadores.length / this.numeroEquipes
+    );
+
     jogadoresOrdenados.forEach((jogador, index) => {
-      let timeMenosCheio = this.encontrarTimeMenosCheio(times);
-      times[timeMenosCheio].push(jogador);
+      if (timeAtual === this.numeroEquipes) {
+        // Reinicia a distribuição para o primeiro time se todos os times foram usados
+        timeAtual = 0;
+      }
+
+      // Verifica se o time atual já possui a quantidade máxima de jogadores
+      if (times[timeAtual].length < jogadoresPorTime) {
+        times[timeAtual].push(jogador);
+        timeAtual++;
+      }
     });
 
+    this.mostrarTitulo = true;
     this.timesBalanceados = times;
 
-    // // Mostre no console a composição de cada time
-    // times.forEach((time, index) => {
-    //   const somaNiveis = time.reduce(
-    //     (soma, jogador) => soma + jogador.nivel,
-    //     0
-    //   );
-    //   console.log(
-    //     `Time ${index + 1}: ${time
-    //       .map((j) => `${j.nome} (${j.nivel})`)
-    //       .join(', ')}, Soma Níveis: ${somaNiveis}`
-    //   );
-    // });
+    setTimeout(() => {
+      const equipesSorteadasElement =
+        this.elementRef.nativeElement.querySelector(
+          '.dados_container_equipesBalanceadas'
+        );
+      this.scrollTo(equipesSorteadasElement);
+    }, 100);
   }
 
   encontrarTimeMenosCheio(times: Jogador[][]): number {
@@ -184,6 +178,7 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
     this.mostrarTitulo = false;
     this.mostrarTimes = false;
     this.jogadores = [];
+    this.timesBalanceados = [];
   }
 
   onTituloInput() {
@@ -195,13 +190,9 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
     this.qtdJogadores = arrayNomes.filter((nome) => nome.trim() !== '').length;
   }
 
-  autoScrollToTeams() {
-    const equipesSorteadasElement = this.elementRef.nativeElement.querySelector(
-      '.dados_container_equipesSorteadas'
-    );
-
-    if (equipesSorteadasElement) {
-      const posicao = equipesSorteadasElement.getBoundingClientRect();
+  scrollTo(element: HTMLElement) {
+    if (element) {
+      const posicao = element.getBoundingClientRect();
 
       // Adiciona a posição atual da rolagem para obter a posição absoluta
       const scrollTop =
