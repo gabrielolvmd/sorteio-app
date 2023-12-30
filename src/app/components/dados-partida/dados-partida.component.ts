@@ -10,7 +10,8 @@ export class DadosPartidaComponent implements OnInit {
   numeroEquipes: number = 2;
   qtdJogadores: number = 0;
   titulo: string = '';
-  mostrarTitulo = false;
+  mostrarTitulo: boolean = false;
+  mostrarTimes: boolean = false;
   equipesSorteadas: any[] = [];
   errorMesage: string = '';
 
@@ -39,6 +40,7 @@ export class DadosPartidaComponent implements OnInit {
       console.log(this.equipesSorteadas);
     }
     this.mostrarTitulo = true;
+    this.mostrarTimes = true;
     setTimeout(() => {
       this.autoScrollToTeams();
     }, 100);
@@ -50,9 +52,19 @@ export class DadosPartidaComponent implements OnInit {
     this.titulo = '';
     this.qtdJogadores = 0;
     this.mostrarTitulo = false;
+    this.mostrarTimes = false;
   }
 
   sortearEquipes(nomes: string[], numeroDeEquipes: number) {
+    // Reformula os nomes que ultrapassem 15 caracteres e substitui as últimas letras por (...)
+    nomes.forEach((nome, index, array) => {
+      if (nome.length > 15) {
+        array[index] = nome.slice(0, 13).trim().concat('...');
+      }
+    });
+
+    console.log(nomes);
+
     // Embaralha a ordem dos nomes aleatoriamente
     const nomesEmbaralhados = [...(nomes || [])].sort(
       () => Math.random() - 0.5
