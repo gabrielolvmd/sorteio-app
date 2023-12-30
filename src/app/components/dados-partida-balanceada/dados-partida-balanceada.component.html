@@ -5,6 +5,7 @@
       <textarea id="lista-jogadores" name="lista-jogadores" rows="16" cols="40" [(ngModel)]="nomes" (input)="onNomesInput($event)" placeholder="Digite cada jogador em uma linha"></textarea>
       <span class="qtdJogadores">{{qtdJogadores}}</span>
     </div>
+
     <div class="dados_container_info">
       <div class="num-equipes_container">
         <label for="num-equipes">Número de equipes</label>
@@ -20,39 +21,45 @@
       </div>
       <div class="errorMesage">{{errorMesage}}</div>
     </div>
+
   </div>
-  <!-- <div class="dados_container_equipesSorteadas" *ngIf="mostrarTimes">
-    <h2 class="titulo" *ngIf="mostrarTitulo">{{titulo}}</h2>
-
-    <div class="equipesSorteadas_grid">
-      <div *ngFor="let equipe of equipesSorteadas; let i = index" class="time">
-
-        <h3 class="titulo_equipe">{{equipe.nome}}</h3>
-        <ul>
-          <li *ngFor="let membro of equipe.membros">{{membro}}</li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
 
   <div class="dados_container_editarJogadores" *ngIf="mostrarNivelJogadores">
     <div class="dados_container_editarJogadores_content" *ngIf="mostrarTitulo">
       <h3>Ajuste o nível dos jogadores utilizando as estrelas</h3>
-      <app-small-border-button text="Sortear"></app-small-border-button>
+      <app-small-border-button text="Sortear" (buttonClick)="sortearTimes()"></app-small-border-button>
     </div>
     <ul class="uljogadores">
       <li *ngFor="let jogador of jogadores">
         <label for="nivelJogador-{{jogador.nome}}" class="nomeJogador">{{jogador.nome}}</label>
-        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-1" class="estrelasJogador">
-        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-2" class="estrelasJogador">
-        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-3" class="estrelasJogador">
-        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-4" class="estrelasJogador">
-        <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-5" class="estrelasJogador">
+        <div class="input-nivelJogador">
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-1" class="estrelasJogador">
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-2" class="estrelasJogador">
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-3" class="estrelasJogador">
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-4" class="estrelasJogador">
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-5" class="estrelasJogador">
+        </div>
       </li>
-
-
-
-
     </ul>
+  </div>
+
+  <div class="dados_container_equipesBalanceadas">
+    <div class="dados_container_equipesBalanceadas_tabela">
+      <div class="tabela_content" *ngFor="let time of timesBalanceados; let i = index">
+        <div class="tabela_content_header">
+          <h2 class="titulo_equipe">Time {{ i + 1 }}</h2>
+          <span>Estrelas ({{ calcularSomatorioPontos(time) }})</span>
+        </div>
+        <div class="time">
+          <li *ngFor="let jogador of time">
+            <p>{{ jogador.nome }}</p>
+            <span>{{ criarEstrelas(jogador.nivel) }}</span>
+          </li>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </div>

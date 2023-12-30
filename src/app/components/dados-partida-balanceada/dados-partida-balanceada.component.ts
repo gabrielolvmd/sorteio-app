@@ -13,11 +13,11 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
   titulo: string = '';
   mostrarTitulo: boolean = false;
   mostrarTimes: boolean = false;
-  equipesSorteadas: any[] = [];
   errorMesage: string = '';
 
   mostrarNivelJogadores: boolean = true;
   jogadores: Jogador[] = [];
+  timesBalanceados: Jogador[][] = [];
 
   constructor(private elementRef: ElementRef) {}
 
@@ -63,6 +63,7 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
     nomesValidos.forEach((nome) => {
       this.jogadores.push({ nome: nome, nivel: 0 });
     });
+
     this.mostrarTitulo = true;
     this.mostrarTimes = true;
     this.mostrarNivelJogadores = true;
@@ -70,6 +71,109 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
     setTimeout(() => {
       this.autoScrollToTeams();
     }, 100);
+  }
+
+  sortearTimes() {
+    // Itera sobre a lista de jogadores
+    this.jogadores.forEach((jogador) => {
+      // Obtém o índice do input marcado para o jogador atual
+      const indiceInputMarcado = this.obterIndiceNivelJogador(jogador.nome);
+
+      // Atribui o valor do índice + 1 ao nível do jogador
+      jogador.nivel = indiceInputMarcado + 1;
+    });
+
+    // Mostre no console o nome e nível de cada jogador
+    this.jogadores.forEach((jogador) => {
+      console.log(`Nome: ${jogador.nome}, Nível: ${jogador.nivel}`);
+    });
+
+    this.sortearTimesBalanceados();
+  }
+
+  // Função para obter o índice do input marcado para um jogador específico
+  obterIndiceNivelJogador(nomeJogador: string): number {
+    // Obtém os elementos de input para o jogador atual
+    const inputElements = document.getElementsByName(
+      `nivelJogador-${nomeJogador}`
+    );
+
+    // Itera sobre os elementos para encontrar o input marcado
+    for (let i = 0; i < inputElements.length; i++) {
+      if ((inputElements[i] as HTMLInputElement).checked) {
+        // Retorna o índice do input marcado
+        return i;
+      }
+    }
+
+    // Se nenhum input estiver marcado, retorna um valor padrão (pode ajustar conforme necessário)
+    return 0;
+  }
+
+  sortearTimesBalanceados() {
+    // Ordena os jogadores por nível em ordem decrescente
+    const jogadoresOrdenados = this.jogadores
+      .slice()
+      .sort((a, b) => b.nivel - a.nivel);
+
+    // Inicializa os times
+    const times: Jogador[][] = [];
+    for (let i = 0; i < this.numeroEquipes; i++) {
+      times.push([]);
+    }
+
+    // Calcula a média desejada de níveis por time
+    const mediaDesejada =
+      jogadoresOrdenados.reduce((soma, jogador) => soma + jogador.nivel, 0) /
+      this.numeroEquipes;
+
+    // Distribui os jogadores nos times tentando manter a soma próxima à média
+    jogadoresOrdenados.forEach((jogador, index) => {
+      let timeMenosCheio = this.encontrarTimeMenosCheio(times);
+      times[timeMenosCheio].push(jogador);
+    });
+
+    this.timesBalanceados = times;
+
+    // // Mostre no console a composição de cada time
+    // times.forEach((time, index) => {
+    //   const somaNiveis = time.reduce(
+    //     (soma, jogador) => soma + jogador.nivel,
+    //     0
+    //   );
+    //   console.log(
+    //     `Time ${index + 1}: ${time
+    //       .map((j) => `${j.nome} (${j.nivel})`)
+    //       .join(', ')}, Soma Níveis: ${somaNiveis}`
+    //   );
+    // });
+  }
+
+  encontrarTimeMenosCheio(times: Jogador[][]): number {
+    let indiceMenosCheio = 0;
+    let menorSoma = times[0].reduce((soma, jogador) => soma + jogador.nivel, 0);
+
+    for (let i = 1; i < times.length; i++) {
+      const somaAtual = times[i].reduce(
+        (soma, jogador) => soma + jogador.nivel,
+        0
+      );
+      if (somaAtual < menorSoma) {
+        menorSoma = somaAtual;
+        indiceMenosCheio = i;
+      }
+    }
+
+    return indiceMenosCheio;
+  }
+
+  calcularSomatorioPontos(time: Jogador[]): number {
+    return time.reduce((soma, jogador) => soma + jogador.nivel, 0);
+  }
+
+  criarEstrelas(nivel: number): string {
+    // Função para criar estrelas com base no nível
+    return '⭐️'.repeat(nivel);
   }
 
   clear() {
@@ -80,47 +184,6 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
     this.mostrarTitulo = false;
     this.mostrarTimes = false;
     this.jogadores = [];
-  }
-
-  sortearEquipes(nomes: string[], numeroDeEquipes: number) {
-    console.log(nomes);
-
-    // Embaralha a ordem dos nomes aleatoriamente
-    const nomesEmbaralhados = [...(nomes || [])].sort(
-      () => Math.random() - 0.5
-    );
-
-    // Verifica se há nomes para sortear
-    if (nomesEmbaralhados.length === 0) {
-      console.error('Não há nomes para sortear.');
-      return [];
-    }
-
-    // Calcula a quantidade de membros em cada equipe
-    const membrosPorEquipe = Math.floor(
-      nomesEmbaralhados.length / numeroDeEquipes
-    );
-
-    // Inicializa as equipes
-    const equipes = [];
-
-    // Preenche as equipes com os nomes sorteados
-    for (let i = 0; i < numeroDeEquipes; i++) {
-      const equipe = nomesEmbaralhados.slice(
-        i * membrosPorEquipe,
-        (i + 1) * membrosPorEquipe
-      );
-      equipes.push({ nome: `Time ${i + 1}`, membros: equipe });
-    }
-
-    // Distribui membros restantes, se houver
-    for (let i = 0; i < nomesEmbaralhados.length % numeroDeEquipes; i++) {
-      const indexEquipe = i < numeroDeEquipes ? i : i - numeroDeEquipes;
-
-      equipes[indexEquipe].membros.push(nomesEmbaralhados.pop()!);
-    }
-
-    return equipes;
   }
 
   onTituloInput() {

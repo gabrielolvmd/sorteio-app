@@ -83,22 +83,6 @@ input {
   cursor: pointer;
 }
 
-.dados_container_equipesSorteadas {
-  width: 100%;
-  max-width: 980px;
-  // border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  margin-bottom: 10em;
-}
-
-.equipesSorteadas_grid {
-  display: grid;
-  gap: 2em;
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .titulo,
 .titulo_equipe {
   font-size: $medium-size;
@@ -108,36 +92,6 @@ input {
 
 .titulo_equipe {
   padding: 0.5em;
-}
-
-.dados_container_equipesSorteadas .time ul {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  text-align: center;
-}
-
-.dados_container_equipesSorteadas .time ul li {
-  padding: 0.5em 1em;
-}
-
-.dados_container_equipesSorteadas .time ul li:nth-child(4n - 3),
-.dados_container_equipesSorteadas .time ul li:nth-child(4n) {
-  background-color: $li-dark-gray; /* Cor azul para o primeiro e quarto elementos em cada grupo de quatro */
-}
-
-.dados_container_equipesSorteadas .time ul li:nth-child(4n - 2),
-.dados_container_equipesSorteadas .time ul li:nth-child(4n - 1) {
-  background-color: $li-light-gray; /* Cor vermelha para o segundo e terceiro elementos em cada grupo de quatro */
-}
-
-.time {
-  display: flex;
-  flex-direction: column;
-  // border: 1px solid red;
-  box-shadow: 5px 5px 9px #dcdcdc, -5px -5px 9px #fefefe;
-  border: 1px solid $border-text-area;
-  outline: none;
 }
 
 .errorMesage {
@@ -152,13 +106,58 @@ input {
   width: 100%;
 }
 
-.uljogadores {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .dados_container_editarJogadores_content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.uljogadores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+}
+
+.uljogadores li {
+  padding: 0.5em 1em;
+  display: flex;
+  justify-content: space-between;
+  background: $li-light-gray;
+}
+
+.dados_container_equipesBalanceadas {
+  max-width: 980px;
+  width: 100%;
+}
+
+.dados_container_equipesBalanceadas_tabela {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  border: 1px solid red;
+}
+
+.tabela_content {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabela_content_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+  &:nth-child(even) {
+    background: $li-light-gray;
+  }
+  &:nth-child(odd) {
+    background: $li-dark-gray;
+  }
 }
