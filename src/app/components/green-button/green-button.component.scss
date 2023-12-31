@@ -9,4 +9,12 @@
   font-size: $medium-size;
   padding: 1em 1.5em;
   border-radius: 1.2em;
+  transition: 0.5s;
+  &:hover {
+    background: color-mix(in srgb, $main-green 90%, black 10%);
+    transition: 0.5s;
+  }
+  @media screen and (max-width: 650px) {
+    font-size: $small-size;
+  }
 }

@@ -28,6 +28,9 @@
   display: flex;
   gap: 3em;
   align-items: center;
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
 }
 
 .menu_loginArea a:last-child {

@@ -17,10 +17,12 @@
 
 .dados_container_inserirInfos {
   display: flex;
-  max-width: 980px;
-  width: 100%;
+  @include containerSizes;
   gap: 4em;
   // border: 1px solid red;
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+  }
 }
 
 .dados_container_lista {
@@ -81,11 +83,15 @@ input {
 
 .limpar-btn {
   cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    transition: 0.1s;
+    font-weight: $semibold;
+  }
 }
 
 .dados_container_equipesSorteadas {
-  width: 100%;
-  max-width: 980px;
+  @include containerSizes;
   // border: 1px solid red;
   display: flex;
   flex-direction: column;
@@ -97,6 +103,9 @@ input {
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(2, 1fr);
+  @media screen and (max-width: 650px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .titulo,
