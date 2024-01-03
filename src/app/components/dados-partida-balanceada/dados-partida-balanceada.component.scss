@@ -180,9 +180,9 @@ input {
 }
 
 .playerStar {
-  color: #c9c9c9;
+  color: $star-light-gray;
 }
 
 .selected {
-  color: red;
+  color: $star-yellow;
 }
