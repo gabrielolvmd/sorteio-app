@@ -2,7 +2,8 @@
   <div class="dados_container_inserirInfos">
     <div class="dados_container_lista">
       <label for="lista-jogadores">Escreva os nomes abaixo</label>
-      <textarea id="lista-jogadores" name="lista-jogadores" rows="16" cols="40" [(ngModel)]="nomes" (input)="onNomesInput($event)" placeholder="Digite cada jogador em uma linha"></textarea>
+      <textarea id="lista-jogadores" name="lista-jogadores" rows="16" cols="40" [(ngModel)]="nomes" (input)="onNomesInput($event)" placeholder="Digite cada jogador em uma linha 
+      *Obs: Não utilize nomes repetidos"></textarea>
       <span class="qtdJogadores">{{qtdJogadores}}</span>
     </div>
 
@@ -33,16 +34,32 @@
       <li *ngFor="let jogador of jogadores">
         <label for="nivelJogador-{{jogador.nome}}" class="nomeJogador">{{jogador.nome}}</label>
         <div class="input-nivelJogador" [attr.name]="'nivelJogador-' + jogador.nome">
+
           <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-1" class="estrelasJogador" (change)="marcaEstrela(jogador)">
-          <i class="fa-solid fa-star playerStar"></i>
+          <label for="nivelJogador-{{jogador.nome}}-1">
+            <i class="fa-solid fa-star playerStar"></i>
+          </label>
+
           <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-2" class="estrelasJogador" (change)="marcaEstrela(jogador)">
-          <i class="fa-solid fa-star playerStar"></i>
+          <label for="nivelJogador-{{jogador.nome}}-2">
+            <i class="fa-solid fa-star playerStar"></i>
+          </label>
+
           <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-3" class="estrelasJogador" (change)="marcaEstrela(jogador)">
-          <i class="fa-solid fa-star playerStar"></i>
+          <label for="nivelJogador-{{jogador.nome}}-3">
+            <i class="fa-solid fa-star playerStar"></i>
+          </label>
+
           <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-4" class="estrelasJogador" (change)="marcaEstrela(jogador)">
-          <i class="fa-solid fa-star playerStar"></i>
+          <label for="nivelJogador-{{jogador.nome}}-4">
+            <i class="fa-solid fa-star playerStar"></i>
+          </label>
+
           <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-5" class="estrelasJogador" (change)="marcaEstrela(jogador)">
-          <i class="fa-solid fa-star playerStar"></i>
+          <label for="nivelJogador-{{jogador.nome}}-5">
+            <i class="fa-solid fa-star playerStar"></i>
+          </label>
+
         </div>
       </li>
     </ul>
@@ -64,7 +81,6 @@
         </div>
       </div>
     </div>
-
 
 
   </div>

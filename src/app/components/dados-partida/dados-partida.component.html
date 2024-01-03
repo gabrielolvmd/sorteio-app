@@ -2,7 +2,8 @@
   <div class="dados_container_inserirInfos">
     <div class="dados_container_lista">
       <label for="lista-jogadores">Escreva os nomes abaixo</label>
-      <textarea id="lista-jogadores" name="lista-jogadores" rows="16" cols="40" [(ngModel)]="nomes" (input)="onNomesInput($event)" placeholder="Digite cada jogador em uma linha"></textarea>
+      <textarea id="lista-jogadores" name="lista-jogadores" rows="16" cols="40" [(ngModel)]="nomes" (input)="onNomesInput($event)" placeholder="Digite cada jogador em uma linha
+      *Obs: Não utilize nomes repetidos"></textarea>
       <span class="qtdJogadores">{{qtdJogadores}}</span>
     </div>
     <div class="dados_container_info">

@@ -96,6 +96,15 @@ input {
   padding: 0.5em;
 }
 
+.limpar-btn {
+  cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    transition: 0.1s;
+    font-weight: $semibold;
+  }
+}
+
 .errorMesage {
   font-size: 14px;
   font-weight: $regular;
@@ -138,6 +147,18 @@ input {
   background: $li-light-gray;
 }
 
+.playerStar {
+  color: $star-light-gray;
+}
+
+.selected {
+  color: $star-yellow;
+}
+
+.estrelasJogador {
+  display: none;
+}
+
 .dados_container_equipesBalanceadas {
   max-width: 980px;
   width: 100%;
@@ -177,12 +198,4 @@ input {
   &:nth-child(odd) {
     background: $li-dark-gray;
   }
-}
-
-.playerStar {
-  color: $star-light-gray;
-}
-
-.selected {
-  color: $star-yellow;
 }

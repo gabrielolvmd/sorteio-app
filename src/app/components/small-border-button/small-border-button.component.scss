@@ -9,4 +9,10 @@
   font-size: $medium-size;
   padding: 0.5em 1em;
   border-radius: 1em;
+  transition: 0.5s;
+  &:hover {
+    background: $main-green;
+    transition: 0.5s;
+    color: white;
+  }
 }
