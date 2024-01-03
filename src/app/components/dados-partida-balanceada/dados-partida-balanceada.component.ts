@@ -107,28 +107,9 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
       times.push([]);
     }
 
-    // Calcula a média desejada de níveis por time
-    const mediaDesejada =
-      jogadoresOrdenados.reduce((soma, jogador) => soma + jogador.nivel, 0) /
-      this.numeroEquipes;
-
-    // Distribui os jogadores nos times tentando manter a soma próxima à média
-    let timeAtual = 0;
-    let jogadoresPorTime = Math.floor(
-      this.jogadores.length / this.numeroEquipes
-    );
-
     jogadoresOrdenados.forEach((jogador, index) => {
-      if (timeAtual === this.numeroEquipes) {
-        // Reinicia a distribuição para o primeiro time se todos os times foram usados
-        timeAtual = 0;
-      }
-
-      // Verifica se o time atual já possui a quantidade máxima de jogadores
-      if (times[timeAtual].length < jogadoresPorTime) {
-        times[timeAtual].push(jogador);
-        timeAtual++;
-      }
+      const timeMenosCheio = this.encontrarTimeMenosCheio(times);
+      times[timeMenosCheio].push(jogador);
     });
 
     this.mostrarTitulo = true;
