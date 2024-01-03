@@ -32,12 +32,17 @@
     <ul class="uljogadores">
       <li *ngFor="let jogador of jogadores">
         <label for="nivelJogador-{{jogador.nome}}" class="nomeJogador">{{jogador.nome}}</label>
-        <div class="input-nivelJogador">
-          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-1" class="estrelasJogador">
-          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-2" class="estrelasJogador">
-          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-3" class="estrelasJogador">
-          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-4" class="estrelasJogador">
-          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-5" class="estrelasJogador">
+        <div class="input-nivelJogador" [attr.name]="'nivelJogador-' + jogador.nome">
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-1" class="estrelasJogador" (change)="marcaEstrela(jogador)">
+          <i class="fa-solid fa-star playerStar"></i>
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-2" class="estrelasJogador" (change)="marcaEstrela(jogador)">
+          <i class="fa-solid fa-star playerStar"></i>
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-3" class="estrelasJogador" (change)="marcaEstrela(jogador)">
+          <i class="fa-solid fa-star playerStar"></i>
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-4" class="estrelasJogador" (change)="marcaEstrela(jogador)">
+          <i class="fa-solid fa-star playerStar"></i>
+          <input type="radio" name="nivelJogador-{{jogador.nome}}" id="nivelJogador-{{jogador.nome}}-5" class="estrelasJogador" (change)="marcaEstrela(jogador)">
+          <i class="fa-solid fa-star playerStar"></i>
         </div>
       </li>
     </ul>

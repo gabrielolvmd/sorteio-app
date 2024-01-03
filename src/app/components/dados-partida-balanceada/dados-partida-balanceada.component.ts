@@ -92,8 +92,8 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
       // Obtém o índice do input marcado para o jogador atual
       const indiceInputMarcado = this.obterIndiceNivelJogador(jogador.nome);
 
-      // Atribui o valor do índice + 1 ao nível do jogador
-      jogador.nivel = indiceInputMarcado + 1;
+      // Atribui o valor do índice ao nível do jogador
+      jogador.nivel = indiceInputMarcado;
     });
 
     // Ordena os jogadores por nível em ordem decrescente
@@ -204,6 +204,26 @@ export class DadosPartidaBalanceadaComponent implements OnInit {
         top: posicaoAbsoluta,
         behavior: 'smooth',
       });
+    }
+  }
+
+  marcaEstrela(jogador: Jogador) {
+    const indiceInputMarcado = this.obterIndiceNivelJogador(jogador.nome);
+    const nivelJogador = indiceInputMarcado;
+
+    const container = document.querySelector(
+      `div[name="nivelJogador-${jogador.nome}"]`
+    );
+
+    const estrelas = container ? container.querySelectorAll('.fa-star') : [];
+    estrelas.forEach((estrela) => {
+      if (estrela.classList.contains('selected')) {
+        estrela.classList.remove('selected');
+      }
+    });
+
+    for (let i = 0; i < nivelJogador; i++) {
+      estrelas[i].classList.add('selected');
     }
   }
 }
