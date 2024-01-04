@@ -2,24 +2,19 @@
 
 .dados_container {
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10em;
-
-  // border: 1px solid red;
   margin-top: 5em;
-  font-weight: $medium;
-  font-size: $medium-size;
+  font: $medium $medium-size;
 }
 
 .dados_container_inserirInfos {
   display: flex;
   @include containerSizes;
   gap: 4em;
-  // border: 1px solid red;
   @media screen and (max-width: 650px) {
     flex-direction: column;
   }
@@ -50,9 +45,6 @@
 
 .dados_container_info {
   width: 100%;
-}
-
-.dados_container_info {
   gap: 2em;
 }
 
@@ -61,9 +53,7 @@ input {
   border: 1px solid $border-text-area;
   outline: none;
   box-shadow: 5px 5px 9px #dcdcdc, -5px -5px 9px #fefefe;
-  font-family: $secondary-font;
-  font-weight: $regular;
-  font-size: $medium-size;
+  font: $regular $medium-size $secondary-font;
   &:focus {
     outline: 1px solid $border-text-focus;
   }
@@ -83,36 +73,26 @@ input {
 
 .limpar-btn {
   cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    font-weight: $semibold;
+  }
 }
 
 .titulo,
 .titulo_equipe {
-  font-size: $medium-size;
-  font-weight: $semibold;
-  font-family: $secondary-font;
+  font: $medium-size $semibold $secondary-font;
 }
 
 .titulo_equipe {
   padding: 0.5em;
 }
 
-.limpar-btn {
-  cursor: pointer;
-  transition: 0.1s;
-  &:hover {
-    transition: 0.1s;
-    font-weight: $semibold;
-  }
-}
-
 .errorMesage {
-  font-size: 14px;
-  font-weight: $regular;
-  color: red;
+  font: 14px $regular red;
 }
 
 .dados_container_editarJogadores {
-  // border: 1px solid red;
   @include containerSizes;
   display: flex;
   flex-direction: column;
@@ -120,9 +100,7 @@ input {
 }
 
 .dados_container_editarJogadores_content h3 {
-  font-family: $secondary-font;
-  font-weight: $semibold;
-  font-size: $medium;
+  font: $semibold $medium $secondary-font;
 }
 
 .dados_container_editarJogadores_content {
@@ -169,14 +147,12 @@ input {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
-  // border: 1px solid red;
   @media screen and (max-width: 650px) {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
 .tabela_content {
-  // border: 1px solid red;
   display: flex;
   flex-direction: column;
 }
